@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Innovativa Food - Emprendimiento</title>
+  <title>Innova Food - Emprendimiento</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -19,20 +19,47 @@
       transform: translateY(-5px);
       box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     }
+    .carousel-image {
+      transition: opacity 1s ease-in-out;
+    }
+    .carousel-image:not(.active) {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .carousel-image.active {
+      opacity: 1;
+      position: relative;
+    }
+    .carousel-dot.active {
+      background-color: #fff;
+    }
   </style>
 </head>
 <body class="bg-gray-100 smooth-scroll">
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-cyan-500 to-green-200 text-white py-20">
-    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-      <div class="md:w-1/2 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Innovativa Food</h1>
-        <p class="text-lg md:text-xl mb-6">Un emprendimiento universitario que combina creatividad y sabor con dorilocos y productos únicos.</p>
+  <!-- Hero Section with Carousel -->
+<!-- Hero Section with Full-Screen Carousel -->
+  <section class="relative bg-gradient-to-r from-cyan-500 to-green-200 text-white h-screen">
+    <div class="relative w-full h-full overflow-hidden">
+      <!-- Carousel Images -->
+      <img src="images/carousel1.jpeg" alt="Innovativa Food 1" class="carousel-image active w-full h-full object-cover">
+      <img src="images/carousel2.jpeg" alt="Innovativa Food 2" class="carousel-image w-full h-full object-cover">
+      <img src="images/carousel3.jpeg" alt="Innovativa Food 3" class="carousel-image w-full h-full object-cover">
+      <!-- Text Overlay -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center bg-black bg-opacity-30 px-4">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Innova Food</h1>
+        <p class="text-sm sm:text-base md:text-lg mb-6 max-w-xl">Un emprendimiento universitario que combina creatividad y sabor con dorilocos y productos únicos.</p>
         <a href="#video" class="bg-white text-cyan-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition">Ver Entrevista</a>
       </div>
-      <div class="md:w-1/2 mt-8 md:mt-0">
-        <img src="images/HeroSection.jpeg" alt="Innovativa Food" class="rounded-lg shadow-lg w-full">
-        <p class="text-center mt-4 text-sm italic">Productos innovadores y deliciosos</p>
+      <!-- Navigation Buttons -->
+      <button class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 text-cyan-600 p-2 rounded-full hover:bg-opacity-75" onclick="prevSlide()">❮</button>
+      <button class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 text-cyan-600 p-2 rounded-full hover:bg-opacity-75" onclick="nextSlide()">❯</button>
+      <!-- Carousel Dots -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <span class="carousel-dot w-3 h-3 rounded-full bg-white bg-opacity-50 cursor-pointer active" onclick="goToSlide(0)"></span>
+        <span class="carousel-dot w-3 h-3 rounded-full bg-white bg-opacity-50 cursor-pointer" onclick="goToSlide(1)"></span>
+        <span class="carousel-dot w-3 h-3 rounded-full bg-white bg-opacity-50 cursor-pointer" onclick="goToSlide(2)"></span>
       </div>
     </div>
   </section>
@@ -40,9 +67,9 @@
   <!-- Video Section -->
   <section id="video" class="py-16 bg-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Entrevista con Innovativa Food</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 text-center mb-8">Entrevista con Innova Food</h2>
       <div class="flex justify-center">
-        <video controls class="rounded-lg shadow-lg max-w-full h-auto" style="max-width: 800px;">
+        <video controls class="rounded-lg shadow-lg w-full max-w-[800px] h-auto">
           <source src="video/entrevista.mp4" type="video/mp4">
           Tu navegador no soporta el elemento de video.
         </video>
@@ -55,46 +82,56 @@
     <div class="container mx-auto px-4">
       <!-- Question 1 -->
       <div class="question-card bg-white rounded-lg shadow-md p-6 mb-8 flex flex-col md:flex-row items-center">
-        <img src="images/Q1.png" alt="Pregunta 1" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6">
+        <img src="images/Q1.jpg" alt="Pregunta 1" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
         <div>
-          <h3 class="text-2xl font-semibold text-cyan-600 mb-2">¿Cómo nació tu idea de negocio?</h3>
-          <p class="text-gray-700">La idea de Innovativa Food surgió de la pasión por combinar sabores únicos y la creatividad en la cocina. Identificamos una oportunidad en el mercado universitario para ofrecer dorilocos y productos innovadores que fueran accesibles y atractivos para los estudiantes.</p>
+          <h3 class="text-xl sm:text-2xl font-semibold text-cyan-600 mb-2">¿Cómo nació tu idea de negocio?</h3>
+           <p class="text-gray-700 text-sm sm:text-base">
+      La idea de negocio surgió a partir del entorno familiar del emprendedor, ya que su familia ha estado históricamente vinculada al comercio y a la manipulación de alimentos. Uno de los principales referentes fue su tío, quien posee un negocio similar al que se presenta en esta propuesta, lo que permitió tomar esa experiencia como base para el desarrollo inicial. Gracias a este respaldo y conocimiento previo, actualmente cuentan con varias sucursales operativas y se encuentran evaluando nuevas ubicaciones estratégicas para su expansión. Se trata, en esencia, de un emprendimiento de carácter familiar que continúa creciendo con una visión sólida y compartida.
+    </p>
         </div>
       </div>
 
       <!-- Question 2 -->
       <div class="question-card bg-white rounded-lg shadow-md p-6 mb-8 flex flex-col md:flex-row items-center">
-        <img src="images/Q2.png" alt="Pregunta 2" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6">
+        <img src="images/Q2.jpg" alt="Pregunta 2" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
         <div>
-          <h3 class="text-2xl font-semibold text-cyan-600 mb-2">¿Cuál ha sido el mayor reto que enfrentaste y cómo lo superaste?</h3>
-          <p class="text-gray-700">El mayor reto fue la logística inicial para producir y distribuir los productos. Lo superamos optimizando procesos y estableciendo alianzas con proveedores locales, lo que nos permitió garantizar la calidad y disponibilidad.</p>
+          <h3 class="text-xl sm:text-2xl font-semibold text-cyan-600 mb-2">¿Cuál ha sido el mayor reto que enfrentaste y cómo lo superaste?</h3>
+          <p class="text-gray-700 text-sm sm:text-base">
+      Uno de los mayores retos que enfrentó este emprendimiento fue adaptarse a la dinámica acelerada del nuevo entorno comercial. A diferencia de experiencias previas, en esta ubicación la demanda se concentra en periodos muy breves, especialmente durante los cambios de turno de los estudiantes, quienes disponen de apenas quince minutos para adquirir sus productos. Esta situación exigió optimizar los procesos de atención y preparación para despachar a un gran número de clientes en un corto tiempo. Superar este desafío implicó reorganizar el flujo de trabajo, mejorar la eficiencia operativa y capacitar al equipo para responder con agilidad y precisión a la alta demanda en esos momentos clave.
+    </p>
         </div>
       </div>
 
       <!-- Question 3 -->
       <div class="question-card bg-white rounded-lg shadow-md p-6 mb-8 flex flex-col md:flex-row items-center">
-        <img src="images/Q3.png" alt="Pregunta 3" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6">
+        <img src="images/Q3.jpg" alt="Pregunta 3" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
         <div>
-          <h3 class="text-2xl font-semibold text-cyan-600 mb-2">¿Qué errores cometiste al principio y qué aprendiste de ellos?</h3>
-          <p class="text-gray-700">Al principio, subestimamos la demanda y tuvimos problemas de inventario. Aprendimos a realizar proyecciones más precisas y a mantener un stock adecuado para satisfacer a nuestros clientes.</p>
+          <h3 class="text-xl sm:text-2xl font-semibold text-cyan-600 mb-2">¿Qué errores cometiste al principio y qué aprendiste de ellos?</h3>
+           <p class="text-gray-700 text-sm sm:text-base">
+      Uno de los principales errores que se cometieron al inicio fue no prever el tiempo necesario para la preparación de los productos, lo que generó largas filas y esperas entre los clientes. Esta situación evidenció la necesidad de mejorar los tiempos de atención. Además, el negocio no apostó por la innovación desde el comienzo, lo que limitó su atractivo frente a la competencia. A partir de estas experiencias, el equipo decidió incorporar productos novedosos al catálogo, con el objetivo de ofrecer algo diferente y mejorar tanto la eficiencia como la experiencia del cliente.
+    </p>
         </div>
       </div>
 
       <!-- Question 4 -->
       <div class="question-card bg-white rounded-lg shadow-md p-6 mb-8 flex flex-col md:flex-row items-center">
-        <img src="images/Q4.png" alt="Pregunta 4" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6">
+        <img src="images/Q4.jpg" alt="Pregunta 4" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
         <div>
-          <h3 class="text-2xl font-semibold text-cyan-600 mb-2">¿Qué habilidades consideras esenciales para emprender con éxito?</h3>
-          <p class="text-gray-700">La creatividad, la resiliencia y la capacidad de adaptarse al cambio son clave. Además, habilidades de comunicación y trabajo en equipo son esenciales para construir un negocio sólido.</p>
+          <h3 class="text-xl sm:text-2xl font-semibold text-cyan-600 mb-2">¿Qué habilidades consideras esenciales para emprender con éxito?</h3>
+           <p class="text-gray-700 text-sm sm:text-base">
+      Para este emprendedor, más allá de contar con habilidades técnicas específicas, lo esencial para emprender con éxito es la disposición a arriesgarse. Inició su camino sin conocimientos previos en el sector alimenticio, pero detectó una oportunidad y decidió actuar con determinación. En su experiencia, el aprendizaje llega con la práctica, pero el primer paso siempre es atreverse. La valentía para lanzarse al mercado, aun sin tener todo claro desde el inicio, es vista como la clave para avanzar y crecer en el mundo del emprendimiento.
+    </p>
         </div>
       </div>
 
       <!-- Question 5 -->
       <div class="question-card bg-white rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center">
-        <img src="images/Q5.png" alt="Pregunta 5" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6">
+        <img src="images/Q5.jpg" alt="Pregunta 5" class="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6 object-cover">
         <div>
-          <h3 class="text-2xl font-semibold text-cyan-600 mb-2">¿Qué herramientas tecnológicas usas para brindar un mejor servicio y calidad del producto?</h3>
-          <p class="text-gray-700">Utilizamos redes sociales para promoción, aplicaciones de gestión de inventarios y plataformas de pago digital para facilitar las transacciones, mejorando la experiencia del cliente.</p>
+          <h3 class="text-xl sm:text-2xl font-semibold text-cyan-600 mb-2">¿Qué herramientas tecnológicas usas para brindar un mejor servicio y calidad del producto?</h3>
+           <p class="text-gray-700 text-sm sm:text-base">
+      Actualmente, el emprendimiento no cuenta con un sistema tecnológico implementado. Sin embargo, se está analizando la incorporación de un punto de venta y un sistema contable que permita optimizar los procesos de producción y gestión. La intención es mejorar tanto la atención al cliente como el control interno del negocio. Este proyecto tecnológico se plantea poner en marcha a finales del mes, con el objetivo de dar un paso hacia la digitalización y aumentar la eficiencia operativa en el corto plazo.
+    </p>
         </div>
       </div>
     </div>
@@ -103,7 +140,7 @@
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-8">
     <div class="container mx-auto px-4 text-center">
-      <p>&copy; 2025 Innovativa Food. Todos los derechos reservados.</p>
+      <p class="text-sm sm:text-base">© 2025 Padrón. Todos los derechos reservados.</p>
     </div>
   </footer>
 
@@ -116,5 +153,49 @@
           behavior: 'smooth'
         });
       });
+    });
+
+    // Carousel functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-image');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % totalSlides;
+      showSlide(next);
+    }
+
+    function prevSlide() {
+      const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(prev);
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+    }
+
+    // Auto-slide every 5 seconds
+    let autoSlide = setInterval(nextSlide, 5000);
+
+    // Pause auto-slide on hover
+    const carousel = document.querySelector('.carousel-image').parentElement;
+    carousel.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    carousel.addEventListener('mouseleave', () => autoSlide = setInterval(nextSlide, 5000));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
     });
   </script>
